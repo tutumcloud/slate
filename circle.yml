@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+checkout:
+  post:
+    - git submodule init
+    - git submodule update
+dependencies:
+  override:
+    - docker build -t sut .
+test:
+  override:
+    - docker run -d -p 4567:4567 sut; sleep 5
+    - curl --retry 10 --retry-delay 5 -L -I -f http://localhost:4567/

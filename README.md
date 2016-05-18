@@ -9,11 +9,17 @@ In your source documentation folder (which looks like [this](https://github.com/
 
 	FROM tutum/slate
 
+And a `docker-compose.yml` with the following contents:
 
-Build the image and run it:
+    version: "2"
+    services:
+      slate:
+        build: .
+        ports:
+         - "4567:4567"
 
-	docker build -t mydocs .
-	docker run -d -p 4567:4567 mydocs
+Use Docker Compose to run it:
 
+    docker-compose up --build
 
 Go to `http://localhost:4567/` and you will see your new API beautiful documentation.
